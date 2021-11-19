@@ -16,10 +16,39 @@ class Request
         return substr($path, 0, $position);
     }
 
+    public function isGet()
+    {
+        return $this->getMethod() === 'get';
+    }
+    
+    public function isPost()
+    {
+        return $this->getMethod() === 'post';
+    }
+
     public function getMethod()
     {
         $method = strtolower($_SERVER['REQUEST_METHOD']);
 
         return $method;
+    }
+
+    public function getBody()
+    {
+        $body = [];
+
+        if ($this->getMethod() == 'get') {
+            foreach ($_GET as $key => $value) {
+                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+        
+        if ($this->getMethod() == 'post') {
+            foreach ($_POST as $key => $value) {
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            }
+        }
+
+        return $body;
     }
 }
