@@ -1,0 +1,15 @@
+{
+    "name": "julio/php-mof",
+    "authors": [
+        {
+            "name": "Julio Nascimento",
+            "email": "jnascimento@gatefy.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }  
+    },
+    "require": {}
+}
